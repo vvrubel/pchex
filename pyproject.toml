@@ -1,0 +1,83 @@
+[tool.poetry]
+name = "pchex"
+version = "0.1.0"
+description = "PubChem Data Extractor"
+authors = ["Anna Vasileva <vasilyeva1510@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8.1"
+pydantic = {extras = ["dotenv"], version = "^1.8.2"}
+typer = {extras = ["all"], version = "^0.4.0"}
+tqdm = "^4.62.3"
+requests = "^2.26.0"
+loguru = "^0.5.3"
+
+[tool.poetry.dev-dependencies]
+jupyter = "^1.0.0"
+pytest = "^6.2.5"
+isort = "^5.9.3"
+black = "^21.9b0"
+flake8 = "^4.0.1"
+mypy = "^0.910"
+pre-commit = "^2.15.0"
+
+
+[tool.isort]
+profile = "black"
+line_length = 100
+src_paths = ["pchex", "tests"]
+skip_gitignore = true
+filter_files = true
+known_first_party = ["pchex"]
+known_third_party = [
+    "fastapi",
+    "loguru",
+    "pydantic",
+    "pytest",
+    "rdkit",
+    "requests",
+    "starlette",
+    "starlette_context",
+    "uvicorn"
+]
+
+[tool.black]
+line-length = 100
+target_version = ["py38"]
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | build
+  | dist
+)/
+'''
+
+#[tool.mypy]
+#python_version = "3.8"
+#warn_return_any = true
+#warn_unused_configs = true
+#plugins = ["pydantic.mypy", "sqlalchemy.ext.mypy.plugin"]
+
+#[[tool.mypy.overrides]]
+#module = "mycode.foo.*"
+#disallow_untyped_defs = true
+#
+#[[tool.mypy.overrides]]
+#module = "mycode.bar"
+#warn_return_any = false
+#
+#[[tool.mypy.overrides]]
+#module = [
+#    "somelibrary",
+#    "some_other_library"
+#]
+#ignore_missing_imports = true
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
